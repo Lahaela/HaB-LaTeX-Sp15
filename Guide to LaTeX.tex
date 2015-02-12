@@ -1,0 +1,124 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amsfonts, color, booktabs, centernot, textcomp,amssymb,geometry,graphicx,verbatim,enumerate, bbm}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setlength\parindent{0pt}
+\newcounter{sectionnum}
+\def\Name{Leah Dickstein}  % Your name
+\def\Homework{n}% Homework number
+\def\Session{Spring 2015}
+
+
+\title{Guide to LaTeX}
+\author{\Name}
+\lhead{Guide to LaTeX: Section \thesectionnum}
+\rhead{\Name}
+
+
+\begin{document}
+\maketitle
+
+\textbf{Note}: Make sure you have LaTeX and a good TeX editor!\\
+Desktop:
+\begin{itemize}
+\item TexMaker (what I personally use)
+\item LyX (a WYSIWYG, meaning it's basically Word for LaTeX. Lower learning curve, but I think it's slower in the long run because the whole point is NOT using your mouse.)
+\end{itemize}
+Browser:
+\begin{itemize}
+\item ShareLaTeX (comes with a ton of templates!)
+\item Overleaf (compiles real-time, but is slower)
+\end{itemize}
+
+\textbf{Note 2:} Don't pronounce it Latex like the plastic. It's either Law-Tech or Lay-Tech. I prefer the former.
+
+\section{Getting Started}
+\setcounter{sectionnum}{1}
+We've already provided you with HW solution templates and self-grade templates, which should allow you to skip past this section. If you're starting from scratch, you start your blank document with:
+
+\begin{verbatim}
+\documentclass[11pt]{article}
+\begin{document}
+Body of text.
+\end{document}
+\end{verbatim}
+
+Anything between \verb+\documentclass+ and \verb+\begin{document}+ is called the \textbf{Preamble} of the article, and anything below is the \textbf{Body}. Anything below \verb+\end{document}+ won't be compiled, so you can put temporary text or text that contains compile errors for storage.\\
+
+Alright, it's time to begin: with a title! In the preamble, put:
+\begin{verbatim}
+\title{Guide to LaTeX}
+\author{Your Name Here!}
+\end{verbatim}
+
+LaTeX will automatically put the date it was last compiled. Now you're good to go, and you can just start typing. However, throwing a bunch of text on a page is pretty hard to read...two things:\\
+
+1) LaTeX ignores whitespace. Start newlines with either \verb+\\+ or \verb+\newline+.\\
+
+2) Give your document more structure with sections! LaTeX has quite a few options:
+
+\part{An Example Part}
+The command: \verb+\part{An Example Part}+\\
+
+\chapter{An Example Chapter}\\
+The command: \verb+\chapter{An Example Chapter}+\\
+Note that the other section headers besides Chapter have an auto-newline after, but if you want a newline after Chapter you need to do it yourself.
+
+\section{An Example Section}
+The command: \verb+\section{An Example Section}+\\
+
+\subsection{You can have subsections}
+The command: \verb+\subsection{You can have subsections}+\\
+
+\subsubsection{And subsubsections!}
+The command: \verb+\subsubsection{And subsubsections!}+\\
+That's the smallest you can go :( This isn't inception.\\
+
+LaTeX auto-numbers everything, but if you don't want the numbering just add an asterisk. \verb+\section{Unicorns!}+ $>>$ \verb+\section*{and Rainbows!}+\\
+
+\textcolor{blue}{\textbf{For the purposes of your homework}}, ignore parts and chapters. Just use sections.
+
+\setcounter{section}{1}
+\section{Environments}
+\setcounter{sectionnum}{2}
+
+\begin{itemize}
+\item inline math
+\item outline math
+\item itemize
+\item enumerate
+\item verbatim
+\end{itemize}
+
+\section{More Formatting Magic}
+\subsection{Table of Contents}
+
+\subsection{Margins}
+
+\subsection{Minipage}
+Sometimes you want to have multiple columns, or to split your page up into sections. Enter the minipage command. If I want to have two columns, I would just\\
+
+\begin{minipage}{0.5\textwidth}
+use the command
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{verbatim}
+\begin{minipage}{0.5\textwidth}
+text here!
+\end{minipage}
+\end{verbatim}
+\end{minipage}
+
+\section{Useful Packages}
+\subsection{Links}
+
+\subsection{Colors}
+Add to the header of the document \verb+\usepackage{color}+ to gain access to the default 8 colors. Alternatively, you can write \verb+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}+, which will give you access to a BAJILLION colors.
+
+\subsection{Algorithms}
+
+\subsection{Circuits}
+
+\section{Appendices}
+
+\end{document}
