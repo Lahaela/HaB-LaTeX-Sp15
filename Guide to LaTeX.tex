@@ -1,6 +1,9 @@
 \documentclass[11pt]{article}
-\usepackage{amsmath,amsfonts, color, booktabs, centernot, textcomp,amssymb,geometry,graphicx,verbatim,enumerate, bbm}
+\usepackage{amsmath,amsfonts, booktabs, centernot, textcomp,amssymb,geometry,graphicx,verbatim,enumerate, bbm}
+\usepackage[colorlinks=true, linktoc=all, linkcolor=black, urlcolor=blue]{hyperref}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 \usepackage{fancyhdr}
+\setlength{\headheight}{15.2pt}
 \pagestyle{fancy}
 \setlength\parindent{0pt}
 \newcounter{sectionnum}
@@ -21,16 +24,18 @@
 \textbf{Note}: Make sure you have LaTeX and a good TeX editor!\\
 Desktop:
 \begin{itemize}
-\item TexMaker (what I personally use)
-\item LyX (a WYSIWYG, meaning it's basically Word for LaTeX. Lower learning curve, but I think it's slower in the long run because the whole point is NOT using your mouse.)
+\item \href{http://www.xm1math.net/texmaker/}{\textbf{TexMaker}} (what I personally use)
+\item \href{http://www.lyx.org/}{\textbf{LyX}} (a WYSIWYG, meaning it's basically Word for LaTeX. Lower learning curve, but I think it's slower in the long run because the whole point is NOT using your mouse.)
 \end{itemize}
 Browser:
 \begin{itemize}
-\item ShareLaTeX (comes with a ton of templates!)
-\item Overleaf (compiles real-time, but is slower)
+\item \href{https://www.sharelatex.com/}{\textbf{ShareLaTeX}} (comes with a ton of templates and allows multiple people working on the same doc!)
+\item \href{https://www.overleaf.com/}{\textbf{Overleaf}} (compiles real-time, but is slower)\\
 \end{itemize}
 
-\textbf{Note 2:} Don't pronounce it Latex like the plastic. It's either Law-Tech or Lay-Tech. I prefer the former.
+\textbf{Note 2:} Don't pronounce it Latex like the plastic. It's either Law-Tech or Lay-Tech. I prefer the former.\\
+
+\textbf{Note 3}: I can't find the fucking symbol! How do I represent this? \href{http://detexify.kirelabs.org/classify.html}{\textbf{Detexify}} is your best bet.
 
 \tableofcontents
 
@@ -96,6 +101,10 @@ LaTeX auto-numbers everything, but if you don't want the numbering just add an a
 \subsection{Lists}
 
 \section{More Formatting Magic}
+\setcounter{sectionnum}{3}
+\subsection{Foonotes}
+Footnotes are super easy, but important enough to get its own section. Directly behind the text, put \verb+\footnote{text}+ and LaTeX will take care of putting it at the bottom, numbering, etc. To specify numbering, use \verb+\footnote[number]{text}+.
+
 \subsection{Include Graphics}
 \textcolor{magenta}{***EXTREMELY IMPORTANT***}\\
 When your classes ask you to make a figure, make it in powerpoint and take a screenshot. Then throw the image into your LaTeX.\\
@@ -106,11 +115,13 @@ Add to the preamble \verb+\usepackage{graphicx}+.
 \includegraphics[width=0.5\textwidth]{image_name}
 \end{verbatim}
 
-1) Don't put the file extension like .jpeg or .png, just the image name. LaTeX will search the home directory for the name.\\
+1) Don't put the file extension like .jpeg or .png, just the image name. LaTeX will search the home directory for the name. \textit{If you have a space in the file name (WHY??) then you need to put the extension.}\\
 
 2) If you use Texmaker, it will autocomplete to \verb+\includegraphics[scale=•]{•}+ but I prefer using \verb+width=\textwidth+. You get a better sense of how it fills the page.\\
 
-3) If you want to include pdf pages, add the package \verb+\usepackage{pdfpages}+ to the preamble. The command is \verb+\includepdf[pages={1,3,5}]{myfile.pdf}+. For the whole document or a range use a hyphen: \verb+\includepdf[pages={-}]{myfile.pdf}+.
+3) If you want to include pdf pages, add the package \verb+\usepackage{pdfpages}+ to the preamble. The command is \verb+\includepdf[pages={1,3,5}]{myfile.pdf}+. For the whole document or a range use a hyphen: \verb+\includepdf[pages={-}]{myfile.pdf}+.\\
+
+Documentation \href{http://en.wikibooks.org/wiki/LaTeX/Importing_Graphics}{\textbf{here}}. You can do more fancy stuff like adding borders to your images, rotate, crop, etc.
 
 \subsection{Table of Contents}
 Add \verb+\tableofcontents+ where you want your Table of Contents to be printed. All auto-numbered sections are added automatically.\\
@@ -122,9 +133,14 @@ You can add stuff manually with the command: \begin{verbatim}
 
 The default depth shows all sections, subsections, and subsubsections. To change the depth of the ToC, add to the preamble (remember that's the part above \verb+\begin{document}+) the command: \verb+\setcounter{tocdepth}{2}+. This would remove subsubsections. If you changed the 2 to 4, the ToC would include paragraphs, etc.\\
 
-\textbf{Note}: You have to compile LaTeX twice for your ToC changes to show up. The first time you compile the ToC records changes you've made, and the second time it displays the changes.
+\textbf{Note}: You have to compile LaTeX twice for your ToC changes to show up. The first time you compile the ToC records changes you've made, and the second time it displays the changes.\\
+
+Documentation \href{http://en.wikibooks.org/wiki/LaTeX/Document_Structure#Table_of_contents}{\textbf{here}}.
 
 \subsection{Margins}
+In the preamble, use the geometry package: \verb+\usepackage[margin=1in]{geometry}+.\\
+
+You can also change the margins halfway through the document. On the page you want to change, add \verb+{\newgeometry{left=0.8in,right=0.8in,top=1in,bottom=1in}+, and if you want to go back just type \verb+\restoregeometry+.
 
 \subsection{Minipage}
 Sometimes you want to have multiple columns, or to split your page up into sections. You want to put two pictures or tables next to each other that would otherwise be hard to do. Enter the minipage command! If I want to have two columns, I would just\\
@@ -146,20 +162,197 @@ You can also modify the vertical orientation of the text. By modifying the comma
 
 Remember to newline before and after the minipage, as it doesn't have built in newlines.\\
 
-\textbf{Super fancy example}: \verb+\begin{minipage}[t][5cm][b]{0.5\textwidth}+ .\\ This has a defined height of 5cm, aligns to the bottom of the page, and takes up half the page in width.\\
+\textbf{Super fancy example}: \verb+\begin{minipage}[t][5cm][b]{0.5\textwidth}+ .\\ This has a defined height of 5cm, aligns to the bottom of the page, and takes up half the page in width.\footnote{http://www.sascha-frank.com/latex-minipage.html}\\
 
 \textbf{Note}: Do NOT nest minipages within each other! It messes up formatting and makes LaTeX sad, especially when it comes to footnotes. Figure out a simpler way to organize your page.
 
 \section{Useful Packages}
+\setcounter{sectionnum}{4}
+TeX is like coding (it's actually Turing complete!). Everything you need, there's probably a package for it! You do NOT have to have a new \verb+\usepackage{package-name}+ for each package. You can chain them like \verb+\usepackage{package1, package2, package3}+. If a package has features that can be modified, you add brackets in front e.g. \verb+\usepackage{circuitikz}+ $>>$ \verb+\usepackage[american]{circuitikz}+ switches the Circuit package from the default European style to the American style (which is used in EE40.)
+
 \subsection{Links}
+Add to the preamble \verb+\usepackage{hyperref}+ \\
+
+Whenever you want to add a link, just use \verb+\href{url-name}{text}+. If you want to add a local file, you can modify the command to \verb+\href{run:/path/to/file.ext}{text}+.\\
+
+This allows you to have anchors within the same document!\\
+An anchor is \verb+\hypertarget{label}{target caption}+\\ and a link to an anchor is \verb+\hyperlink{label}{link caption}+. \\
+
+This is what I usually use:
+\begin{verbatim}
+\usepackage[colorlinks=true, linktoc=all, linkcolor=black, urlcolor=blue]{hyperref}
+\end{verbatim}
+It colors my links, but the default colors are red for internal links and magenta for URLs. Since I don't like those colors, I change URLs to blue. I want my ToC to look normal, so I change internal link color to black. Finally, I link up my ToC. The added bonus is that you can now see your ToC in Preview! Compile the doc and open it in Preview, then click View-Table of Contents or Alt-Command-3.
 
 \subsection{Colors}
-Add to the header of the document \verb+\usepackage{color}+ to gain access to the default 8 colors. Alternatively, you can write \verb+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}+, which will give you access to a BAJILLION colors.
+Add to the preamble \verb+\usepackage{color}+ to gain access to the default 8 colors. Alternatively, you can write \verb+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}+, which will give you access to a BAJILLION colors. Table of colors can be found \href{http://en.wikibooks.org/wiki/LaTeX/Colors}{\textbf{here}}.\\
+
+\textbf{Default colors}: white, black, red, green, blue, cyan, magenta, yellow.\\
+
+Two ways to add color to text:
+\begin{itemize}
+\item \verb+\textcolor{declared-color}{text}+ is the simplest and what I use most often. It is inline, which means you can \textbf{not} have newlines within the text.
+\item \verb+{\color{declared-color} some text}+ will work even if you are coloring more than one paragraph.
+\end{itemize}
+
+Fancy stuff:
+\begin{itemize}
+\item \verb+\pagecolor{delcared-color}+
+\item \verb+\colorbox{yellow}{Hi!}+ $>>$ \colorbox{yellow}{Hi!}
+\item \verb+\fcolorbox{Fuchsia}{Apricot}{Hello world}+ $>>$ \fcolorbox{Fuchsia}{Apricot}{Hello world} \\ Different colored frame. Note that I had to capitalize these colors, because that's how they're defined in dvips.
+\end{itemize}
+
+\subsection{Fancy Header}
+How do you get that header that shows up on every page, you ask? Add this to the preamble:
+
+\begin{verbatim}
+\usepackage{fancyhdr}
+\setlength{\headheight}{15.2pt}
+\pagestyle{fancy}
+\lhead{Guide to LaTeX: Section \thesectionnum}
+\chead{}
+\rhead{\Name}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+\end{verbatim}
+
+This is the code for this particular document. Fancyhdr is the package for the header, and there are three columns where I can place text in both the header and the footer. You can see I've also defined variables (covered below) so that the section number updates based on which page I'm on.\\
+
+\href{http://en.wikibooks.org/wiki/LaTeX/Page_Layout#Customizing_with_fancyhdr}{\textbf{Here's}} a short documentation, and \href{http://get-software.net/macros/latex/contrib/fancyhdr/fancyhdr.pdf}{\textbf{here's}} a much longer pdf written by the original writer of the package.
 
 \subsection{Algorithms}
+The following was taken from \href{https://piazza.com/class/i3qmjjk51u62ib?cid=91}{\textbf{Jimmy Wu's Piazza post}} (thanks Jimmy! You're an awesome TA!)
+
+\begin{verbatim}
+\usepackage{algorithm} % Boxes/formatting around algorithms
+\usepackage[noend]{algpseudocode} % Algorithms
+
+\begin{algorithm}
+    \begin{algorithmic}[1]
+    \Statex
+    \Function{Align-To-Profile}{$M$, $X$, $p$}
+        \For{$i \gets 1 \ldots m$}
+            \State $V(i,0) \gets \sum_{k=1}^i S(-,i)$
+        \EndFor
+        \For{$j \gets 1 \ldots n$}
+            \State $V(0,j) \gets \sum_{l=1}^j K\sigma(x_l,-)$
+        \EndFor
+            
+        \Statex
+        \For{$i \gets 1 \ldots m$}
+            \For{$j \gets 1 \ldots n$}
+                \State $V(i,j) \gets \max
+                    \begin{cases}
+                        V(i,j-1) + K\sigma(x_j,-) \\
+                        V(i-1,j) + S(-,i) \\
+                        V(i-1,j-1) + S(x_j,i)
+                    \end{cases}$
+            \EndFor
+        \EndFor
+        \State \Return alignment for $X$ by backtracking from $V(m,n)$ Needleman-Wunsch
+    \EndFunction
+    \end{algorithmic}
+\end{algorithm}
+\end{verbatim}
+
+More commands (such as If statements, etc.) can be found \href{http://en.wikibooks.org/wiki/LaTeX/Algorithms#Typesetting_using_the_algorithmicx_package}{\textbf{here}}.
 
 \subsection{Circuits}
+I learned Circuits from \href{http://www.latex-tutorial.com/tutorials/advanced/lesson-12/}{\textbf{this website}}.\\
+
+Circuits is a subset of tikz, which is the default TeX Drawing package. So you need to make sure you have both in the preamble:
+\begin{verbatim}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\end{verbatim}
+
+The circuits have built-in shortcuts for resistors, current sources, etc. so you simply...draw. Look at the following example!
+
+\begin{verbatim}
+\begin{figure}[h!]
+  \begin{center}
+    \begin{circuitikz}
+      \draw (0,0)
+      to[V,v=$U_q$] (0,2) % The voltage source
+      to[short] (2,2)
+      to[R=$R_1$] (2,0) % The resistor
+      to[short] (0,0);
+    \end{circuitikz}
+    \caption{My first circuit.}
+  \end{center}
+\end{figure}
+\end{verbatim}
+
+This code produces this image:\\
+\begin{center}\includegraphics[scale=1]{circuit_1}\end{center}
+
+Here's a more complicated example, from my EE40 HW:
+\begin{verbatim}
+\begin{circuitikz}
+      \draw (0,0)
+      to[R = $16\Omega$] (0,2)
+      to[short] (2,2)
+      to[R=$16\Omega$] (2,0)
+      to[short] (0,0);
+      \draw (2,2)
+      to[R=$4\Omega$] (4,2)
+      to[R=$12\Omega$] (4,0)
+      to[short] (2,0);
+      \draw (4, 0)
+      to[short] (7, 0)
+      to[I = 10A] (7, 2)
+      to[short] (4, 2);
+      \draw (7, 2)
+      to[short] (9,2)
+      to[R = $6\Omega$] (9, 0)
+      to[short] (7,0);
+      \draw (9, 2)
+      to[R = $4\Omega$] (11, 2)
+      to[R = $16\Omega$] (11, 0)
+      to[short] (9, 0);
+      \draw (11,2)
+      to[short] (13,2)
+      to[R = $16\Omega$] (13, 0)
+      to[short] (11, 0);
+\end{circuitikz}
+\end{verbatim}
+
+Which produces the following:\\
+\begin{center}
+\includegraphics[width=\textwidth]{circuit_2}
+\end{center}
+
+I recommend working from left to right. I tried starting in the center and drawing to the left, then drawing to the right, and it broke everything. There's a really long manual from the creator of the package \href{http://www.latex-tutorial.com/media/downloads/manuals/circuitikzmanual.tar.gz}{\textbf{here}}.
+
+\section{Extra for Experts}
+\setcounter{sectionnum}{5}
+Like...actual coding.
+
+\subsection{Defining Variables}
+If I want to create something like a template, I want to populate a bunch of fields with the same name/value, which changes per person. You can define variables in the preamble:
+\begin{verbatim}
+\def\Name{Leah Dickstein}
+\end{verbatim}
+
+Now, I can use the command \verb+\Name+ whenever I want my name to show up. For example, in my header I have:
+\begin{verbatim}
+\title{Guide to LaTeX}
+\author{\Name}
+\lhead{Guide to LaTeX: Section \thesectionnum}
+\rhead{\Name}
+\end{verbatim}
+
+In the header, you also notice \verb+\thesectionnum+. I created a new counter for the section number, and after each section I update the counter.
+\begin{verbatim}
+\newcounter{sectionnum}
+\setcounter{sectionnum}{2}
+\end{verbatim}
+
+Note that when I represent the counter, I add the keyword "the".
 
 \section{Appendices}
+\setcounter{sectionnum}{6}
+If I have time, I'll fill this in with tables of symbols. But for now, there are extensive resources online with huge tables of common symbols \href{http://estudijas.lu.lv/pluginfile.php/14809/mod_page/content/12/instrukcijas/matematika_moodle/LaTeX_Symbols.pdf}{\textbf{here}} and \href{http://www.artofproblemsolving.com/Wiki/index.php/LaTeX:Symbols}{\textbf{here}}. My recommendation? Download something like TexMaker that allows you to click for symbols, because memorizing is pointless.
 
 \end{document}
