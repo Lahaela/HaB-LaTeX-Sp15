@@ -32,6 +32,8 @@ Browser:
 
 \textbf{Note 2:} Don't pronounce it Latex like the plastic. It's either Law-Tech or Lay-Tech. I prefer the former.
 
+\tableofcontents
+
 \section{Getting Started}
 \setcounter{sectionnum}{1}
 We've already provided you with HW solution templates and self-grade templates, which should allow you to skip past this section. If you're starting from scratch, you start your blank document with:
@@ -53,30 +55,26 @@ Alright, it's time to begin: with a title! In the preamble, put:
 
 LaTeX will automatically put the date it was last compiled. Now you're good to go, and you can just start typing. However, throwing a bunch of text on a page is pretty hard to read...two things:\\
 
-1) LaTeX ignores whitespace. Start newlines with either \verb+\\+ or \verb+\newline+.\\
+1) LaTeX ignores whitespace. Start newlines with either \verb+\\+ or \verb+\newline+. Start new pages with \verb+\newpage+.\\
 
 2) Give your document more structure with sections! LaTeX has quite a few options:
 
-\part{An Example Part}
+\part*{An Example Part}
 The command: \verb+\part{An Example Part}+\\
 
-\chapter{An Example Chapter}\\
-The command: \verb+\chapter{An Example Chapter}+\\
-Note that the other section headers besides Chapter have an auto-newline after, but if you want a newline after Chapter you need to do it yourself.
-
-\section{An Example Section}
+\section*{An Example Section}
 The command: \verb+\section{An Example Section}+\\
 
-\subsection{You can have subsections}
+\subsection*{You can have subsections}
 The command: \verb+\subsection{You can have subsections}+\\
 
-\subsubsection{And subsubsections!}
+\subsubsection*{And subsubsections!}
 The command: \verb+\subsubsection{And subsubsections!}+\\
 That's the smallest you can go :( This isn't inception.\\
 
-LaTeX auto-numbers everything, but if you don't want the numbering just add an asterisk. \verb+\section{Unicorns!}+ $>>$ \verb+\section*{and Rainbows!}+\\
+LaTeX auto-numbers everything, but if you don't want the numbering just add an asterisk. \verb+\section{Unicorns!}+ $>>$ \verb+\section*{and Rainbows!}+. As you'll see later, stuff that's not auto-numbered doesn't get added to the Table of Contents. You can add those headers manually.\\ You can leave the curly braces blank and just have the number, e.g. \verb+\section{•}+ \\
 
-\textcolor{blue}{\textbf{For the purposes of your homework}}, ignore parts and chapters. Just use sections.
+\textcolor{magenta}{\textbf{For the purposes of your homework}}, ignore parts and chapters. Just use sections.
 
 \setcounter{section}{1}
 \section{Environments}
@@ -85,18 +83,51 @@ LaTeX auto-numbers everything, but if you don't want the numbering just add an a
 \begin{itemize}
 \item inline math
 \item outline math
+\item matrix
 \item itemize
 \item enumerate
 \item verbatim
+\item center vs flushleft vs flushright
+\item figure / table
 \end{itemize}
 
+\subsection{Math}
+
+\subsection{Lists}
+
 \section{More Formatting Magic}
+\subsection{Include Graphics}
+\textcolor{magenta}{***EXTREMELY IMPORTANT***}\\
+When your classes ask you to make a figure, make it in powerpoint and take a screenshot. Then throw the image into your LaTeX.\\
+
+Add to the preamble \verb+\usepackage{graphicx}+.
+
+\begin{verbatim}
+\includegraphics[width=0.5\textwidth]{image_name}
+\end{verbatim}
+
+1) Don't put the file extension like .jpeg or .png, just the image name. LaTeX will search the home directory for the name.\\
+
+2) If you use Texmaker, it will autocomplete to \verb+\includegraphics[scale=•]{•}+ but I prefer using \verb+width=\textwidth+. You get a better sense of how it fills the page.\\
+
+3) If you want to include pdf pages, add the package \verb+\usepackage{pdfpages}+ to the preamble. The command is \verb+\includepdf[pages={1,3,5}]{myfile.pdf}+. For the whole document or a range use a hyphen: \verb+\includepdf[pages={-}]{myfile.pdf}+.
+
 \subsection{Table of Contents}
+Add \verb+\tableofcontents+ where you want your Table of Contents to be printed. All auto-numbered sections are added automatically.\\
+
+There's also \verb+\listoffigures+ and \verb+\listoftables+. Most of the commands below also apply; just replace \verb+toc+ with \verb+lof+ or \verb+lot+.\\
+
+You can add stuff manually with the command: \begin{verbatim}
+\addcontentsline{toc}{subsection}{Extra Special Stuff}\end{verbatim} This adds "Extra Special Stuff" (in the appropriate spot) with depth "subsection".\\
+
+The default depth shows all sections, subsections, and subsubsections. To change the depth of the ToC, add to the preamble (remember that's the part above \verb+\begin{document}+) the command: \verb+\setcounter{tocdepth}{2}+. This would remove subsubsections. If you changed the 2 to 4, the ToC would include paragraphs, etc.\\
+
+\textbf{Note}: You have to compile LaTeX twice for your ToC changes to show up. The first time you compile the ToC records changes you've made, and the second time it displays the changes.
 
 \subsection{Margins}
 
 \subsection{Minipage}
-Sometimes you want to have multiple columns, or to split your page up into sections. Enter the minipage command. If I want to have two columns, I would just\\
+Sometimes you want to have multiple columns, or to split your page up into sections. You want to put two pictures or tables next to each other that would otherwise be hard to do. Enter the minipage command! If I want to have two columns, I would just\\
 
 \begin{minipage}{0.5\textwidth}
 use the command
@@ -107,7 +138,17 @@ use the command
 text here!
 \end{minipage}
 \end{verbatim}
-\end{minipage}
+\end{minipage}\newline\\
+
+In this case, \verb+\textwidth+ is the width of the page from margin to margin, and I'm just dividing it in two. If I wanted four columns, I would use \verb+0.25\textwidth+ between the curly braces. You can also have fixed widths, although I find them less useful.\\
+
+You can also modify the vertical orientation of the text. By modifying the command \verb+\begin{minipage}{width}+ $>>$ \verb+\begin{minipage}[t]{width}+ it's now aligned to the top instead of the default center. You can align bottom with [b].\\
+
+Remember to newline before and after the minipage, as it doesn't have built in newlines.\\
+
+\textbf{Super fancy example}: \verb+\begin{minipage}[t][5cm][b]{0.5\textwidth}+ .\\ This has a defined height of 5cm, aligns to the bottom of the page, and takes up half the page in width.\\
+
+\textbf{Note}: Do NOT nest minipages within each other! It messes up formatting and makes LaTeX sad, especially when it comes to footnotes. Figure out a simpler way to organize your page.
 
 \section{Useful Packages}
 \subsection{Links}
