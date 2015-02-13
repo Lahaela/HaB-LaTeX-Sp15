@@ -20,6 +20,7 @@
 
 \begin{document}
 \maketitle
+\textbf{Significant contributions from}: Justin Commins\\
 
 \textbf{Note}: Make sure you have LaTeX and a good TeX editor!\\
 Desktop:
@@ -85,20 +86,148 @@ LaTeX auto-numbers everything, but if you don't want the numbering just add an a
 \section{Environments}
 \setcounter{sectionnum}{2}
 
-\begin{itemize}
-\item inline math
-\item outline math
-\item matrix
-\item itemize
-\item enumerate
-\item verbatim
-\item center vs flushleft vs flushright
-\item figure / table
-\end{itemize}
-
-\subsection{Math}
+\subsection{Text Alignment}
+\begin{center} This is \verb+\begin{center}\end{center}+\end{center}
+\begin{flushleft} This is \verb+\begin{flushleft}\end{flushleft}+\end{flushleft}
+\begin{flushright} This is \verb+\begin{flushright}\end{flushright}+\end{flushright}
+\begin{raggedright} This is \verb+\begin{raggedright}\end{raggedright}+\end{raggedright}
 
 \subsection{Lists}
+Two environments are most common: \textbf{itemize} and \textbf{enumerate}. Itemize = bullet points, Enumerate = numbered lists.\\
+
+\textbf{Example}:
+\begin{verbatim}
+\begin{itemize}
+\item a
+\item b
+\item \begin{itemize}
+    \item c1
+    \item c2
+    \item \begin{enumerate}
+        \item c3i
+        \item c3ii
+    \end{enumerate}
+    \end{itemize}
+\end{itemize}
+\end{verbatim}
+
+\textbf{Output}:
+\begin{itemize}
+\item a
+\item b
+\item \begin{itemize}
+    \item LaTeX notices that you're indenting
+    \item and changes the bullet
+    \item \begin{enumerate}
+        \item Note the change
+        \item from itemize to enumerate!
+    \end{enumerate}
+    \end{itemize}
+\end{itemize}
+
+\textbf{Notes}:
+\begin{enumerate}
+\item[1)] You can newline within the same bullet point, but don't end a bulletpoint with a newline. Just use \verb+\item+
+\item[2)] Max depth of nested lists: 4
+\item[3)] If you want to change the formatting of the number (like in this example), you can manually do so using brackets $>>$ \verb+\item[3)]+
+\item[4)] You can do a lot more, especially if you want to change from arabic numbers to something else or change the bullet points, but it gets fairly complicated. Read more \href{http://en.wikibooks.org/wiki/LaTeX/List_Structures}{\textbf{here}}.
+\end{enumerate}
+
+
+\subsection{Math}
+Inline math can be done with \verb+$n$+. Some characters or control sequences can only be displayed as math. Here's a sum $\sum_{k=0}^n 2^k$. This looks like\\
+
+\verb+Here's a sum $\sum_{k=0}^n 2^k$.+
+
+\verb+\displaymath+, however, looks like, and will take it's own line regarless of placement. It has its own formatting too. \verb+\[ \sum_{k=0}^n 2^k \]+ \[\sum_{k=0}^n 2^k\]
+
+\textbf{Note}: \verb+$$...$$+ works as well instead of \verb+\[ ... \]+, although it is recommended against. It breaks the formatting of a (relatively obscure) command called \verb+\fleqno+.\\
+
+\verb+\left( math-stuff \right)+ can be useful too. This controls the sizes of your brackets. It tends to work better in it's own line, so \verb+\[ ... \]+ is the way to go. Here it is in action.\[\left(a+\left(b+\left(\frac{c}{d}\right)\right)\right) \]
+\begin{center}vs\end{center}
+\[(a+(b+(\frac{c}{d})))\]
+
+Sometimes you want to have normal text in the middle of your math equation. Just typing text removes all the spaces! Use \verb+\text{}+.\\
+
+Spacing is really important, because math mode often squishes stuff together too much. I recommend memorizing these for ease of use:\\
+\begin{center}
+\begin{tabular}{c|c}
+\verb+\,+ & Small space\\
+\verb+\:+ & Medium space\\
+\verb+\;+ & Large space\\
+\verb+\quad+ & Really large space
+\end{tabular}
+\end{center}
+
+\subsubsection{Align}
+Equations look nice when they're lined up.
+\begin{verbatim}
+\begin{align}
+x &= 2 + 3 * 4^2\\
+&= 2 + 3 * 16\\
+&= 2 + 48\\
+&= 50
+\end{align}
+\end{verbatim}
+\begin{align}
+x &= 2 + 3 * 4^2\\
+&= 2 + 3 * 16\\
+&= 2 + 48\\
+&= 50
+\end{align}
+
+The default numbers all equations on the right side. To remove numbering of equations, just add a star \verb+\begin{align}+ $>>$ \verb+\begin{align*}+.\\
+
+This example only used one \verb+&+, but you can have multiple columns (that align left) using \verb+&&+, \verb+&&&+, etc. The formatting can get a bit weird, so \textcolor{magenta}{for your homework} you will most often use one \verb+&+.
+
+%ADD HOW TO PUT EQUATION NUMBERS ON LEFT
+
+\subsection{Tables}
+To make a table, use \verb+\begin{tabular}{}+ The second argument is your list of columns, and what format the have. For example, \verb+\begin{tabular}{lcr}{\end{tabular}+ gives left- center- and right- justified columns. You don't need the second argument in matrices. 
+
+\begin{verbatim}
+\begin{tabular}{ll|l}
+11 & 12 & 13 \\
+21 & 22 & 23
+\end{tabular}
+
+$\begin{bmatrix}
+11 & 12 & 13 \\
+21 & 22 & 23
+\end{bmatrix}$
+\end{verbatim}
+
+\begin{minipage}{0.5\textwidth}
+\begin{center}
+\begin{tabular}{ll|l}
+11 & 12 & 13 \\
+21 & 22 & 23
+\end{tabular}\end{center}
+\end{minipage}
+\begin{minipage}{0.5\textwidth}
+\begin{center}$ \begin{bmatrix}
+11 & 12 & 13 \\
+21 & 22 & 23
+\end{bmatrix} $\end{center}
+\end{minipage}\\
+
+\textbf{Notes:}
+\begin{enumerate}
+\item I add a vertical line in the tabular argument e.g. ccc $>>$ cc|c
+\item Add a horizontal line using \verb+\hline+
+\item We used bmatrix instead of just matrix. There IS a matrix environment \verb+\begin{matrix}+, but bmatrix auto-includes the bracket.
+\end{enumerate}
+
+\subsection{Verbatim}
+If you want to escape everything, use either \begin{verbatim}\verb+ some-code-or-commands +\end{verbatim}\\
+or\\
+
+\verb+ \begin{verbatim} \end{verbatim} +\\
+
+Similar to math mode, the short way shows it inline, and using \verb+\begin{}+ creates a differently formatted environment.
+
+\subsection{Figure}
+
 
 \section{More Formatting Magic}
 \setcounter{sectionnum}{3}
@@ -324,6 +453,9 @@ Which produces the following:\\
 \end{center}
 
 I recommend working from left to right. I tried starting in the center and drawing to the left, then drawing to the right, and it broke everything. There's a really long manual from the creator of the package \href{http://www.latex-tutorial.com/media/downloads/manuals/circuitikzmanual.tar.gz}{\textbf{here}}.
+
+\subsection{Graphs and FSMs}
+Use \href{http://madebyevan.com/fsm/}{\textbf{this GUI}} from Evan Wallace (random guy on the Internet, thanks!). You can then just click "Export LaTeX".
 
 \section{Extra for Experts}
 \setcounter{sectionnum}{5}
