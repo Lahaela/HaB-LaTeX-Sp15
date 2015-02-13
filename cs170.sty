@@ -1,0 +1,95 @@
+% cs170.sty - style file for CS 170 homeworks
+
+\usepackage{amsmath,textcomp}
+
+\def\coursenumber{CS 170}
+\def\class{Algorithms}
+\def\semester{Spring 2015}
+\def\instructor{Christos Papadimitriou and Prasad Raghavendra}
+
+\def\endproofmark{$\Box$}
+\newenvironment{proof}{\par{\bf Proof}:}{\endproofmark\smallskip}
+
+\newskip\saveskip
+\newskip\saveindent
+\saveskip=\baselineskip
+
+%macros for use in assignments and exams
+\def\q#1#2{{\bf\item (#1 pts.)\quad #2}}
+
+\def\tab{\hbox{\kern10pt}}
+
+\textheight=9in
+\textwidth=6.5in
+\topmargin=-.75in
+\oddsidemargin=0.25in
+\evensidemargin=0.25in
+\parindent=0pt
+\parskip=5pt
+\itemsep=-1pt
+\floatsep 9pt plus 2pt minus 3pt
+\intextsep 9pt plus 2pt minus 3pt
+\textfloatsep=9pt plus 2pt minus 3pt
+\renewcommand{\baselinestretch}{1.0}
+\font\dunhd=cmdunh10 scaled \magstep3
+\font\dunhc=cmdunh10 scaled \magstep2
+\font\dunhb=cmdunh10 scaled \magstep1
+\font\dunha=cmdunh10 scaled \magstep1
+\date{}
+
+\def\maketitle{%
+ \begingroup
+ \newpage
+ \global\@topnum\z@ \@maketitle 
+ \thispagestyle{myheadings}
+ \endgroup
+ \setcounter{footnote}{0}
+ \let\maketitle\relax
+ \let\@maketitle\relax}
+\def\@maketitle{\newpage
+\hrule height6pt \vskip .7em
+\makebox[1.5in][l]{\dunhb \coursenumber}
+{\dunhb \class \hfill \ }
+\vskip-0.1in 
+\makebox[1.5in][l]{\dunhb \semester}
+{\dunhb \instructor \hfill \dunhd \title \par} 
+\vskip 0.6em
+\hrule height6pt 
+ \par
+ \vskip .5em} 
+\def\section{\@startsection {section}{1}{\z@}{-3.0ex plus -.6ex minus 
+    -.2ex}{1.3ex plus .1ex}{\dunhb}}
+\def\subsection{\@startsection{subsection}{2}{\z@}{-1.6ex plus -.5ex minus 
+   -.1ex}{0.9ex plus .1ex}{\dunha}}
+
+%%%%%% page headings
+
+\def\foottext{\begin{footnotesize}\coursenumber, \semester, \title \hfill\qquad\thepage\end{footnotesize}}
+
+\def\ps@myheadings{\let\@mkboth\@gobbletwo
+\def\@oddfoot{\foottext}%
+\def\@evenfoot{\foottext}%
+\def\@evenhead{}\def\@oddhead{}}
+
+\pagestyle{myheadings}
+
+%%%%%% additional symbols or names for them
+
+\def\ceil#1{\lceil #1 \rceil}
+\def\floor#1{\lfloor #1 \rfloor}
+
+\def\N{\mathbb{N}}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\O{\mathit{O}}
+\def\qed{$\Box$}
+
+\usepackage{times,latexsym,mathptmx,comment,latexsym,epsf,amssymb,graphicx,url,enumerate}
+
+\newcounter{sparectr}
+\newenvironment{qunlist}{\begin{list}{{\bf\arabic{sparectr}.}}%
+                                       {\usecounter{sparectr}
+                                        \setlength{\leftmargin}{0pt}}}%
+                          {\end{list}}
+\newenvironment{qparts}{\begin{enumerate}[{(}a{)}]}{\end{enumerate}}
