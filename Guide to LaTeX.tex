@@ -2,6 +2,8 @@
 \usepackage{amsmath,amsfonts, booktabs, centernot, textcomp,amssymb,geometry,graphicx,verbatim,enumerate, bbm}
 \usepackage[colorlinks=true, linktoc=all, linkcolor=black, urlcolor=blue]{hyperref}
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{algorithm} % Boxes/formatting around algorithms
+\usepackage[noend]{algpseudocode} % Algorithms
 \usepackage{fancyhdr}
 \setlength{\headheight}{15.2pt}
 \pagestyle{fancy}
@@ -387,6 +389,33 @@ The following was taken from \href{https://piazza.com/class/i3qmjjk51u62ib?cid=9
 \end{algorithm}
 \end{verbatim}
 
+%\begin{algorithm}
+%    \begin{algorithmic}[1]
+%    \Statex
+%    \Function{Align-To-Profile}{$M$, $X$, $p$}
+%        \For{$i \gets 1 \ldots m$}
+%            \State $V(i,0) \gets \sum_{k=1}^i S(-,i)$
+%        \EndFor
+%        \For{$j \gets 1 \ldots n$}
+%            \State $V(0,j) \gets \sum_{l=1}^j K\sigma(x_l,-)$
+%        \EndFor
+%            
+%        \Statex
+%        \For{$i \gets 1 \ldots m$}
+%            \For{$j \gets 1 \ldots n$}
+%                \State $V(i,j) \gets \max
+%                    \begin{cases}
+%                        V(i,j-1) + K\sigma(x_j,-) \\
+%                        V(i-1,j) + S(-,i) \\
+%                        V(i-1,j-1) + S(x_j,i)
+%                    \end{cases}$
+%            \EndFor
+%        \EndFor
+%        \State \Return alignment for $X$ by backtracking from $V(m,n)$ Needleman-Wunsch
+%    \EndFunction
+%    \end{algorithmic}
+%\end{algorithm}
+
 More commands (such as If statements, etc.) can be found \href{http://en.wikibooks.org/wiki/LaTeX/Algorithms#Typesetting_using_the_algorithmicx_package}{\textbf{here}}.
 
 \subsection{Circuits}
@@ -415,8 +444,8 @@ The circuits have built-in shortcuts for resistors, current sources, etc. so you
 \end{figure}
 \end{verbatim}
 
-This code produces this image:\\
-\begin{center}\includegraphics[scale=1]{circuit_1}\end{center}
+%This code produces this image:\\
+%\begin{center}\includegraphics[scale=1]{circuit_1}\end{center}
 
 Here's a more complicated example, from my EE40 HW:
 \begin{verbatim}
@@ -450,9 +479,9 @@ Here's a more complicated example, from my EE40 HW:
 \end{verbatim}
 
 Which produces the following:\\
-\begin{center}
-\includegraphics[width=\textwidth]{circuit_2}
-\end{center}
+%\begin{center}
+%\includegraphics[width=\textwidth]{circuit_2}
+%\end{center}
 
 I recommend working from left to right. I tried starting in the center and drawing to the left, then drawing to the right, and it broke everything. There's a really long manual from the creator of the package \href{http://www.latex-tutorial.com/media/downloads/manuals/circuitikzmanual.tar.gz}{\textbf{here}}.
 
